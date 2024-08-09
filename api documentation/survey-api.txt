@@ -1,0 +1,156 @@
+openapi: 3.0.1
+info:
+  title: Product IT Assessment API
+  description: API for managing product surveys
+  version: 1.0.0
+servers:
+  - url: http://localhost:8080
+paths:
+  /surveys:
+    get:
+      summary: Get all surveys to Dashboard 
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DashboardResponse'
+        '400':
+          description: Bad request
+        '500':
+          description: Internal server error
+ 
+  /survey/{surveyid}:
+    get:
+      summary: Get single survey response
+      parameters:
+        - name: surveyid
+          in: path
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DashboardResponse'
+        '400':
+          description: Bad request
+        '500':
+          description: Internal server error
+ 
+  /survey:
+    post:
+      summary: Create a new Survey
+      operationId: createSurvey
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                domain_name:
+                  type: string
+                company_name:
+                  type: string
+                email:
+                  type: string
+                set:
+                  type: object
+                  object:
+                  $ref: '#/components/schemas/SetSchema'
+                  
+                status:
+                  type: string
+                  enum: [Pending, Accepted, Rejected]
+      responses:
+        '201':
+          description: Survey created successfully
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  message:
+                    type: string
+                  survey_id:
+                    type: string                  
+components:
+  schemas:
+  
+    QuestionRequest:
+      type: object
+      properties:
+        question:
+          type: string
+          description: The text of the question
+        Answers:
+          type: array
+          items:
+            $ref: '#/components/schemas/Answer'
+          description: List of Answers for the questions
+    Question:
+      type: object
+      properties:
+        questionId:
+          type: string
+          description: The ID of the question
+        question:
+          type: object
+          $ref: '#/components/schemas/QuestionRequest'
+          description: The text of the question along with answers
+          
+    Answer:
+      type: object
+      properties:
+        option:
+            type: string
+            description: The text of the Answer
+        suggestion:
+            type: string
+            description: The suggestion for the Answer
+
+   
+    DashboardResponseItem:
+      type: object
+      properties:
+        surveyId:
+          type: string
+          example: "12345"
+        requestor:
+          type: string
+          example: "John Doe"
+        companyName:
+          type: string
+          example: "ABC Corp"
+        domain:
+          type: string
+          example: "IT"
+        status:
+          type: string
+          example: "Pending"
+      required:
+        - surveyId
+        - companyName
+        - domain
+        - status
+ 
+    DashboardResponse:
+      type: array
+      items:
+        $ref: '#/components/schemas/DashboardResponseItem'
+  
+    SetSchema:
+      type: object
+      properties:
+        setname:
+          type: string
+          example: "Codelink"
+        questions:
+          type: array
+          items:
+            $ref: '#/components/schemas/QuestionRequest'
