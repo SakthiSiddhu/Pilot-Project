@@ -1,0 +1,48 @@
+package com.pilotproject.SurveyMicro.controller;
+
+import com.pilotproject.SurveyMicro.Exceptions.ResourceNotFoundException;
+import com.pilotproject.SurveyMicro.Feginn.FigenClient;
+import com.pilotproject.SurveyMicro.Service.SurveyService;
+import com.pilotproject.SurveyMicro.model.Survey;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
+
+@RestController
+@RequestMapping("/survey")
+public class Surveycontroller {
+    @Autowired
+    SurveyService surveyService;
+
+    @Autowired
+    FigenClient figenClient;
+
+
+    @GetMapping()
+    public ResponseEntity<List<Survey>> getAllSurveys() {
+        return new ResponseEntity<List<Survey>>(surveyService.getallSurveys(), HttpStatus.OK);
+    }
+
+    @GetMapping("/{setName}")
+    public ResponseEntity<Survey> getAssessment(@PathVariable String setName) {
+        return new ResponseEntity<Survey>(surveyService.findSetName(setName), HttpStatus.OK);
+    }
+
+
+    @PostMapping()
+    public ResponseEntity<Survey> postSurvey(@RequestBody Survey survey) {
+
+        return ResponseEntity.ok(surveyService.postSurvey(survey));
+
+    }
+
+    @ExceptionHandler(ResourceNotFoundException.class)
+    public ResponseEntity<String> handleAssessmentNotFoundException(ResourceNotFoundException ex) {
+        return ResponseEntity.status(HttpStatus.OK).body(ex.getMessage());
+    }
+
+
+}
