@@ -22,5 +22,8 @@ public class Survey {
     private String domain;
     @Enumerated(EnumType.STRING)
     private Status status;
+    @ElementCollection
+    @CollectionTable(name = "survey_question_ids", joinColumns = @JoinColumn(name = "survey_id"))
+    @Column(name = "question_id")
     private List<Long> questionid;
 }

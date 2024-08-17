@@ -13,9 +13,6 @@ public class Answer {
 
     private Long answerId;
 
-    private Question question;
-
-
     private String option;
 
     private String suggestion;

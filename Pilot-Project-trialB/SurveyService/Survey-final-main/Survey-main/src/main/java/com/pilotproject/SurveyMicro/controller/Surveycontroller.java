@@ -3,6 +3,7 @@ package com.pilotproject.SurveyMicro.controller;
 import com.pilotproject.SurveyMicro.Exceptions.ResourceNotFoundException;
 import com.pilotproject.SurveyMicro.Feginn.FigenClient;
 import com.pilotproject.SurveyMicro.Service.SurveyService;
+import com.pilotproject.SurveyMicro.dto.SurveyDTO;
 import com.pilotproject.SurveyMicro.model.Survey;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -22,13 +23,17 @@ public class Surveycontroller {
 
 
     @GetMapping()
-    public ResponseEntity<List<Survey>> getAllSurveys() {
-        return new ResponseEntity<List<Survey>>(surveyService.getallSurveys(), HttpStatus.OK);
+    public ResponseEntity<List<SurveyDTO>> getAllSurveys() {
+        return new ResponseEntity<List<SurveyDTO>>(surveyService.getallSurveys(), HttpStatus.OK);
     }
 
     @GetMapping("/{setName}")
-    public ResponseEntity<Survey> getAssessment(@PathVariable String setName) {
-        return new ResponseEntity<Survey>(surveyService.findSetName(setName), HttpStatus.OK);
+    public ResponseEntity<SurveyDTO> getAssessment(@PathVariable String setName) {
+        return new ResponseEntity<SurveyDTO>(surveyService.findSetName(setName), HttpStatus.OK);
+    }
+    @GetMapping("surveyid/{surveyid}")
+    public ResponseEntity<SurveyDTO> getAssessment(@PathVariable long surveyid) {
+        return new ResponseEntity<SurveyDTO>(surveyService.findSurveyId(surveyid), HttpStatus.OK);
     }
 
 
