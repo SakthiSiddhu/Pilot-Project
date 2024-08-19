@@ -1,6 +1,7 @@
 package com.example.AssessmentService.controller;
 
 import com.example.AssessmentService.dto.AssessmentDTO;
+import com.example.AssessmentService.exception.ResourceNotFoundException;
 import com.example.AssessmentService.model.Assessment;
 import com.example.AssessmentService.dto.*;
 import com.example.AssessmentService.model.Question;
@@ -69,4 +70,20 @@ public class AssessmentController {
         return ques;
 
 }
+
+
+
+    @ExceptionHandler(ResourceNotFoundException.class)
+    public ResponseEntity<String> handleResourceNotFoundException(
+            ResourceNotFoundException exception) {
+        return ResponseEntity.ok(exception.getMessage()); // 200 with a custom message
+    }
+
+
+    @ExceptionHandler(DataIntegrityViolationException.class)
+    public ResponseEntity<String> handleDataIntegrityException(
+            DataIntegrityViolationException exception) {
+
+        return ResponseEntity.ok("set alredy exists");
+    }
 }

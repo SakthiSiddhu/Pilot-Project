@@ -48,17 +48,6 @@ public class AssessmentService {
     public List<Assessment> getAllAssessments() {
         return assessmentRepository.findAll();
     }
-//
-//    public AssessmentResponse getAssessmentBySetName(String setName) {
-//        Assessment assessment = assessmentRepository.findBySetName(setName).get();
-//        if (assessment == null) {
-//            throw new ResourceNotFoundException("Set name is invalid");
-//        }
-//        AssessmentResponse response = new AssessmentResponse();
-//        response.setAssessment(assessmentUtil.mapToAssessmentDTO(assessment));
-//        response.setQuestions(assessment.getQuestions());
-//        return response;
-//    }
 
     @Transactional
     public String updateQuestion(Long setId, Long questionId, List<AnswerDTO> answerDtos) {
@@ -124,7 +113,7 @@ public class AssessmentService {
 
         if (!questionToDelete.isPresent()) {
 
-            throw new ResourceNotFoundException(questionIdIsInvalid);
+            throw new ResourceNotFoundException("question is not found");
         }
 
         assessment.getQuestions().remove(questionToDelete.get());
@@ -140,7 +129,7 @@ public class AssessmentService {
     public List<Question> getQuestionsSetName(String setName) {
         Assessment assessment = assessmentRepository.findBySetName(setName).orElse(null);
         if (assessment == null)
-            throw new ResourceNotFoundException(setNameIsInvalid);
+            throw new ResourceNotFoundException("set name is invalid");
         return assessment.getQuestions();
 
     }
