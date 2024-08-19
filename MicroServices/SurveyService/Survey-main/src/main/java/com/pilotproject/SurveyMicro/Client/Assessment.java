@@ -23,6 +23,5 @@ public class Assessment {
     private LocalDateTime createdDate;
     private LocalDateTime modifiedDate;
     private SetStatus status;
-   private List<Question> questions;
-
+    private List<Question> questions;
 }

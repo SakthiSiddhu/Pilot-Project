@@ -16,6 +16,8 @@ import org.springframework.transaction.annotation.Transactional;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
+import java.util.stream.Collectors;
 
 
 @Service
@@ -33,35 +35,47 @@ public class SurveyService {
     @Transactional
     public Survey postSurvey(Survey survey)  {
         List<Question> questionList = null;
-       Question question = null;
-        try{
+        Question question = null;
+        try {
             survey.setStatus(Status.SURVEY_INITIATED);
             questionList = figenClient.getQuestionsBySetName(survey.getSetName());
 
-
-
-        }catch(ResourceNotFoundException e){
-           throw new ResourceNotFoundException(e.getLocalizedMessage());}
-        try{
-            getQuestion(survey);
-            return surveyRepo.save(survey);
-        }catch(ResourceNotFoundException e) {
-            throw new ResourceNotFoundException(e.getLocalizedMessage());
-
+        }catch(Exception e) {
+            throw new ResourceNotFoundException("wrong setname");
         }
-
-
-    }
-
-    private void getQuestion(Survey survey) {
-        Question question = null;
-        try {
-            for (long q : survey.getQuestionid())
-                question = figenClient.fetchques(q).get();
-        } catch (Exception e) {
+        try{
+        getQuestion(survey);
+        return surveyRepo.save(survey);
+        }catch(ResourceNotFoundException e) {
             throw new ResourceNotFoundException("question not found");
         }
+
     }
+    private void getQuestion(Survey survey) {
+        // Initialize questionIds to an empty list if it's null
+        List<Long> questionIds = Optional.ofNullable(survey.getQuestionId()).orElse(new ArrayList<>());
+
+        List<Question> questionList = new ArrayList<>();
+
+        if (questionIds.isEmpty()) {
+            // If questionIds is empty, fetch questions and update questionIds
+            questionList = figenClient.getQuestionsBySetName(survey.getSetName());
+
+            // Collect question IDs from the fetched questions
+            questionIds.addAll(questionList.stream().map(Question::getQuestionId).collect(Collectors.toList()));
+        } else {
+            // Fetch questions based on existing question IDs
+            for (Long qId : questionIds) {
+                Question question = figenClient.fetchques(qId).orElse(null);
+                if (question == null) {
+                    throw new ResourceNotFoundException("Question with ID " + qId + " not found");
+                }
+            }
+        }
+
+        // Additional logic can be added here if needed
+    }
+
 
     public SurveyDTO findSetName(String setName) {
         Survey survey = surveyRepo.findBySetName(setName);
@@ -94,11 +108,11 @@ public class SurveyService {
 
     private SurveyDTO getSurveyDTO(Survey survey)
     {
-        List<Long> questionIds = survey.getQuestionid();
+        List<Long> questionIds = survey.getQuestionId();
 
         List<QuestionDTO> questionList = new ArrayList<>();
         for(long qid: questionIds){
-            Question question = figenClient.fetchques(qid).get();
+            Question question = figenClient.fetchques(qid).orElse(null);
             QuestionDTO questionDTO = new QuestionDTO();
             questionDTO.setQuestion_id(question.getQuestionId());
             questionDTO.setQuestionText(question.getQuestionText());

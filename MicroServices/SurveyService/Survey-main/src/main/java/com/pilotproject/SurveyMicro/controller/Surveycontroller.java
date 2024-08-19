@@ -30,7 +30,8 @@ public class Surveycontroller {
 
     @GetMapping("/{setName}")
     public ResponseEntity<SurveyDTO> getAssessment(@PathVariable String setName) {
-        return new ResponseEntity<SurveyDTO>(surveyService.findSetName(setName), HttpStatus.OK);
+        return new ResponseEntity<SurveyDTO>(surveyService.findSetName(setName),
+                HttpStatus.OK);
     }
     @GetMapping("surveyid/{surveyid}")
     public ResponseEntity<SurveyDTO> getAssessment(@PathVariable long surveyid) {
@@ -40,7 +41,7 @@ public class Surveycontroller {
 
     @PostMapping()
     public ResponseEntity<Survey> postSurvey(@RequestBody Survey survey)
-            throws DataIntegrityViolationException {
+            throws ResourceNotFoundException, DataIntegrityViolationException {
 
             return ResponseEntity.ok(surveyService.postSurvey(survey));
 
@@ -49,7 +50,7 @@ public class Surveycontroller {
 
     @ExceptionHandler(ResourceNotFoundException.class)
     public ResponseEntity<String> handleAssessmentNotFoundException(ResourceNotFoundException ex) {
-        return ResponseEntity.status(HttpStatus.OK).body(ex.getMessage());
+        return ResponseEntity.status(HttpStatus.OK).body(ex.getLocalizedMessage());
     }
 
 

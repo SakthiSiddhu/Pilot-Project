@@ -26,5 +26,5 @@ public class Survey {
     @ElementCollection
     @CollectionTable(name = "survey_question_ids", joinColumns = @JoinColumn(name = "survey_id"))
     @Column(name = "question_id")
-    private List<Long> questionid;
+    private List<Long> questionId;
 }
