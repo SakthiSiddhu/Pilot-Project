@@ -1,0 +1,397 @@
+{
+  "setName": "Terraform Basics Assessment",
+  "domain": "Infrastructure as Code",
+  "questions": [
+    {
+      "description": "What is the purpose of the `terraform init` command?",
+      "answers": [
+        {
+          "value": "Initialize a Terraform working directory",
+          "suggestion": "The `terraform init` command initializes a working directory containing Terraform configuration files. This command is used to download necessary provider plugins and set up the backend."
+        },
+        {
+          "value": "Apply the Terraform configuration",
+          "suggestion": "The `terraform apply` command is used to apply the changes required to reach the desired state of the configuration."
+        }
+      ]
+    },
+    {
+      "description": "Which Terraform command is used to plan the changes required to reach the desired state?",
+      "answers": [
+        {
+          "value": "terraform plan",
+          "suggestion": "The `terraform plan` command creates an execution plan, showing what actions Terraform will take to achieve the desired state specified in the configuration files."
+        },
+        {
+          "value": "terraform destroy",
+          "suggestion": "The `terraform destroy` command is used to remove all the resources managed by Terraform."
+        }
+      ]
+    },
+    {
+      "description": "What is a `provider` in Terraform?",
+      "answers": [
+        {
+          "value": "A plugin that Terraform uses to manage resources",
+          "suggestion": "Providers are plugins that Terraform uses to interact with cloud providers, SaaS providers, and other APIs to manage resources."
+        },
+        {
+          "value": "A way to group multiple resources",
+          "suggestion": "Resources are grouped using `modules`, not `providers`."
+        }
+      ]
+    }
+  ]
+}
+
+
+
+{
+  "setName": "React Class Components Assessment",
+  "domain": "Front-End Development",
+  "questions": [
+    {
+      "description": "What is the correct way to define a class component in React?",
+      "answers": [
+        {
+          "value": "class MyComponent extends React.Component { render() { return <div>Hello</div>; } }",
+          "suggestion": "This is the correct syntax for defining a class component in React. It extends `React.Component` and implements a `render` method."
+        },
+        {
+          "value": "function MyComponent() { return <div>Hello</div>; }",
+          "suggestion": "This syntax is for defining a functional component, not a class component."
+        }
+      ]
+    },
+    {
+      "description": "How do you manage state in a React class component?",
+      "answers": [
+        {
+          "value": "Using `this.state` and `this.setState()`",
+          "suggestion": "In a React class component, you manage state using `this.state` to initialize and `this.setState()` to update the state."
+        },
+        {
+          "value": "Using `useState` hook",
+          "suggestion": "The `useState` hook is used in functional components, not class components."
+        }
+      ]
+    },
+    {
+      "description": "How can you pass props to a child component in a React class component?",
+      "answers": [
+        {
+          "value": "<ChildComponent propName={value} />",
+          "suggestion": "Props are passed to child components by including them as attributes in JSX. The child component can access these props via `this.props`."
+        },
+        {
+          "value": "Directly modifying `this.props` in the child component",
+          "suggestion": "Props should not be modified directly. They are read-only and should be passed as attributes."
+        }
+      ]
+    }
+  ]
+}
+
+
+
+
+{
+  "setName": "Docker Basics Assessment",
+  "domain": "Containerization",
+  "questions": [
+    {
+      "description": "What is the purpose of a Docker container?",
+      "answers": [
+        {
+          "value": "To package an application and its dependencies into a portable container",
+          "suggestion": "Docker containers encapsulate an application along with its dependencies and environment, ensuring consistent behavior across different environments."
+        },
+        {
+          "value": "To manage virtual machines on a physical server",
+          "suggestion": "Docker containers are different from virtual machines; they share the host OS kernel and are lighter weight."
+        }
+      ]
+    },
+    {
+      "description": "How do you create a Docker image from a Dockerfile?",
+      "answers": [
+        {
+          "value": "Use the `docker build` command",
+          "suggestion": "The `docker build` command is used to create Docker images from a Dockerfile. For example: `docker build -t my-image:tag .`"
+        },
+        {
+          "value": "Use the `docker run` command",
+          "suggestion": "The `docker run` command is used to create and start containers from images, not to build images."
+        }
+      ]
+    },
+    {
+      "description": "What is the purpose of the `docker-compose` tool?",
+      "answers": [
+        {
+          "value": "To define and run multi-container Docker applications",
+          "suggestion": "Docker Compose allows you to define and manage multi-container applications using a `docker-compose.yml` file."
+        },
+        {
+          "value": "To interact with Docker's internal network",
+          "suggestion": "Docker Compose is not for interacting with Docker's network but for orchestrating multi-container deployments."
+        }
+      ]
+    }
+  ]
+}
+
+
+
+
+{
+  "setName": "SonarQube Basics Assessment",
+  "domain": "Code Quality",
+  "questions": [
+    {
+      "description": "What is the primary purpose of SonarQube?",
+      "answers": [
+        {
+          "value": "To analyze and measure code quality and maintainability",
+          "suggestion": "SonarQube is a platform used for continuous inspection of code quality, providing insights into code maintainability, reliability, and security."
+        },
+        {
+          "value": "To manage version control of code",
+          "suggestion": "SonarQube does not manage version control. Version control is typically handled by systems like Git or SVN."
+        }
+      ]
+    },
+    {
+      "description": "Which of the following is a key feature of SonarQube?",
+      "answers": [
+        {
+          "value": "Code coverage analysis",
+          "suggestion": "SonarQube provides metrics on code coverage, which helps in identifying untested parts of the codebase."
+        },
+        {
+          "value": "Database migration",
+          "suggestion": "SonarQube does not handle database migrations. It focuses on code quality analysis."
+        }
+      ]
+    },
+    {
+      "description": "How can you integrate SonarQube into your CI/CD pipeline?",
+      "answers": [
+        {
+          "value": "By using SonarQube scanners and plugins in your build process",
+          "suggestion": "You can integrate SonarQube by configuring SonarQube scanners and plugins within your build tools (e.g., Maven, Gradle) and CI/CD systems (e.g., Jenkins, GitHub Actions)."
+        },
+        {
+          "value": "By manually analyzing code without automation",
+          "suggestion": "While manual analysis is possible, SonarQube is typically integrated into CI/CD pipelines for automated, continuous analysis."
+        }
+      ]
+    }
+  ]
+}
+
+
+
+{
+  "setName": "Quarkus Basics Assessment",
+  "domain": "Java Frameworks",
+  "questions": [
+    {
+      "description": "What is Quarkus primarily used for?",
+      "answers": [
+        {
+          "value": "Developing Java applications with a focus on Kubernetes and container-native environments",
+          "suggestion": "Quarkus is designed to optimize Java applications for Kubernetes and container environments, offering fast startup times and low memory usage."
+        },
+        {
+          "value": "Creating and managing databases",
+          "suggestion": "Quarkus is not primarily for database management; it focuses on application development and optimization for cloud environments."
+        }
+      ]
+    },
+    {
+      "description": "Which of the following features is a key advantage of using Quarkus?",
+      "answers": [
+        {
+          "value": "Native image support with GraalVM for faster startup times",
+          "suggestion": "Quarkus supports native image generation with GraalVM, allowing applications to start quickly and use less memory."
+        },
+        {
+          "value": "Built-in support for legacy application frameworks",
+          "suggestion": "Quarkus focuses on modern, cloud-native applications rather than legacy frameworks."
+        }
+      ]
+    },
+    {
+      "description": "How do you configure Quarkus to use a specific extension?",
+      "answers": [
+        {
+          "value": "Add the extension to the `pom.xml` or `build.gradle` file",
+          "suggestion": "Extensions in Quarkus are configured by adding them to your Maven `pom.xml` or Gradle `build.gradle` file, which integrates the desired functionality into your application."
+        },
+        {
+          "value": "Modify application.properties directly",
+          "suggestion": "While `application.properties` is used for configuration, extensions are added through the build configuration files, not directly in `application.properties`."
+        }
+      ]
+    }
+  ]
+}
+
+
+
+
+{
+  "setName": "Spring Boot Basics Assessment",
+  "domain": "Java Frameworks",
+  "questions": [
+    {
+      "description": "What is the primary purpose of Spring Boot?",
+      "answers": [
+        {
+          "value": "To simplify the setup and development of new Spring applications",
+          "suggestion": "Spring Boot simplifies the process of setting up and developing Spring applications by providing pre-configured templates and auto-configuration."
+        },
+        {
+          "value": "To manage and configure database connections",
+          "suggestion": "While Spring Boot can simplify database configuration, its primary purpose is to streamline the development process for Spring applications."
+        }
+      ]
+    },
+    {
+      "description": "How do you define a Spring Boot application entry point?",
+      "answers": [
+        {
+          "value": "By using the `@SpringBootApplication` annotation on a class with a `main` method",
+          "suggestion": "The `@SpringBootApplication` annotation is used on a class with a `main` method to indicate the entry point of a Spring Boot application."
+        },
+        {
+          "value": "By creating a `web.xml` configuration file",
+          "suggestion": "Spring Boot does not use `web.xml`; it relies on annotations and Java-based configuration."
+        }
+      ]
+    },
+    {
+      "description": "Which file is commonly used to configure application properties in Spring Boot?",
+      "answers": [
+        {
+          "value": "application.properties or application.yml",
+          "suggestion": "Spring Boot uses `application.properties` or `application.yml` files to configure various application settings."
+        },
+        {
+          "value": "config.xml",
+          "suggestion": "Spring Boot does not use `config.xml` for configuration; it prefers properties or YAML files."
+        }
+      ]
+    }
+  ]
+}
+
+
+{
+  "setName": "Azure Fundamentals Assessment",
+  "domain": "Cloud Computing",
+  "questions": [
+    {
+      "description": "What is Azure Virtual Machines used for?",
+      "answers": [
+        {
+          "value": "To create and manage virtualized instances of Windows or Linux servers in the cloud",
+          "suggestion": "Azure Virtual Machines (VMs) are used to run virtualized server instances on Azure, allowing you to deploy and manage applications in the cloud."
+        },
+        {
+          "value": "To manage containerized applications",
+          "suggestion": "For containerized applications, Azure provides services like Azure Kubernetes Service (AKS) or Azure Container Instances (ACI), not Azure Virtual Machines."
+        }
+      ]
+    },
+    {
+      "description": "Which Azure service is used for building scalable web applications and APIs?",
+      "answers": [
+        {
+          "value": "Azure App Service",
+          "suggestion": "Azure App Service is a fully managed platform for building, deploying, and scaling web applications and APIs."
+        },
+        {
+          "value": "Azure Blob Storage",
+          "suggestion": "Azure Blob Storage is used for storing large amounts of unstructured data, not for building web applications or APIs."
+        }
+      ]
+    },
+    {
+      "description": "How can you secure access to your Azure resources?",
+      "answers": [
+        {
+          "value": "By using Azure Active Directory (AAD) and Role-Based Access Control (RBAC)",
+          "suggestion": "Azure Active Directory (AAD) and Role-Based Access Control (RBAC) are used to manage and secure access to Azure resources by defining roles and permissions."
+        },
+        {
+          "value": "By configuring local firewall rules",
+          "suggestion": "While local firewalls can provide additional security, access to Azure resources is typically managed through Azure-specific tools like AAD and RBAC."
+        }
+      ]
+    }
+  ]
+}
+
+
+
+{
+  "setName": "Meta Technologies Assessment",
+  "domain": "Social Media and Technologies",
+  "questions": [
+    {
+      "description": "What is the primary purpose of Meta’s Graph API?",
+      "answers": [
+        {
+          "value": "To interact with Meta’s social graph and access data from Facebook’s social network",
+          "suggestion": "Meta’s Graph API allows developers to interact with and retrieve data from Meta’s social graph, including user profiles, posts, and other social interactions."
+        },
+        {
+          "value": "To manage server infrastructure and deployment",
+          "suggestion": "The Graph API is not used for server infrastructure management. It focuses on accessing and interacting with social data."
+        }
+      ]
+    },
+    {
+      "description": "Which Meta product is used for building and managing virtual and augmented reality experiences?",
+      "answers": [
+        {
+          "value": "Meta Horizon Workrooms",
+          "suggestion": "Meta Horizon Workrooms is designed for virtual reality meetings and collaboration, providing tools for virtual and augmented reality experiences."
+        },
+        {
+          "value": "Facebook Ads Manager",
+          "suggestion": "Facebook Ads Manager is used for creating and managing advertising campaigns, not for virtual or augmented reality experiences."
+        }
+      ]
+    },
+    {
+      "description": "What is the purpose of Meta’s PyTorch library?",
+      "answers": [
+        {
+          "value": "To facilitate deep learning research and development",
+          "suggestion": "PyTorch is an open-source deep learning library developed by Meta for building and training neural networks."
+        },
+        {
+          "value": "To create and manage web hosting services",
+          "suggestion": "PyTorch is not related to web hosting services; it is used for machine learning and deep learning tasks."
+        }
+      ]
+    }
+  ]
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
