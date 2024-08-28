@@ -1,0 +1,220 @@
+openapi: 3.0.1
+info:
+  title: Product IT Assessment API
+  description: API for managing product surveys
+  version: 1.0.0
+servers:
+  - url: http://localhost:8080
+paths:
+  /assessments:
+      get:
+        summary: Retrieve All Assessments
+        description: Retrieves a list of all assessments.
+        responses:
+          '200':
+            description: A list of assessments
+            content:
+              application/json:
+                schema:
+                  type: array
+                  items:
+                   $ref: '#/components/schemas/AssessmentDTO'
+  /assessments/createset:
+    post:
+      summary: Create an Assessment
+      description: Creates a new assessment with the provided set name and domain name.
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: array
+              items:
+                   $ref: '#/components/schemas/AssessmentRequest'
+      responses:
+        '200':
+          description: Assessment created successfully
+          content:
+            application/json:
+               schema:
+                  type: array
+                  items:
+                   $ref: '#/components/schemas/AssessmentDTO'
+ 
+  /assessments/{setname}:
+    get:
+      summary: Retrieve assessments based on a setName
+      parameters:
+        - name: setname
+          in: path
+          required: true
+          description: The name of the assessment set to retrieve assessments for
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Successful response with a list of assessments
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/AssessmentResponse'
+        '400':
+          description: Bad request, possibly due to missing or invalid setName
+        '404':
+          description: Assessments not found for the given setName
+        '500':
+          description: Internal server error              
+
+  /assessments/{setName}/question/{questionId}:
+    put:
+      summary: Update a Question/add answer to a question
+      description: Updates an existing question with the provided information.
+      parameters:
+        - name: setName
+          in: path
+          required: true
+          schema:
+            type: string
+        - name: questionId
+          in: path
+          required: true
+          schema:
+            type: integer
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              $ref: '#/components/schemas/QuestionRequest'
+      responses:
+        '200':
+          description: Question updated successfully
+    delete:
+      summary: Delete a Question
+      description: Deletes a specific question by its ID.
+      parameters:
+        - name: setName
+          in: path
+          required: true
+          schema:
+            type: string
+        - name: questionId
+          in: path
+          required: true
+          schema:
+            type: integer
+      responses:
+        '200':
+          description: Question deleted successfully
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  message:
+                    type: string
+
+ 
+ 
+
+
+
+components:
+  schemas:
+    AssessmentRequest:
+      type: object
+      properties:
+        setName:
+          type: string
+          description: The name of the set
+        domain:
+          type: string
+          description: The domain of the assessment
+        createdBy:
+          type: string
+          description: The creator of the assessment
+        Questions:
+          type: array
+          items:
+            $ref: '#/components/schemas/QuestionRequest'
+          description: List of questions in the assessment
+          
+      
+
+    Question:
+      type: object
+      properties:
+        questionId:
+          type: string
+          description: The ID of the question
+        question:
+          type: object
+          $ref: '#/components/schemas/QuestionRequest'
+          description: The text of the question along with answers
+          
+    QuestionRequest:
+      type: object
+      properties:
+        question:
+          type: string
+          description: The text of the question
+        Answers:
+          type: array
+          items:
+            $ref: '#/components/schemas/Answer'
+          description: List of Answers for the questions
+
+      
+   
+    Answer:
+      type: object
+      properties:
+        option:
+            type: string
+            description: The text of the Answer
+        suggestion:
+            type: string
+            description: The suggestion for the Answer
+          
+    AssessmentDTO:
+      type: object
+      properties:
+        setname:
+          type: string
+          example: "string"
+        domain:
+          type: string
+          example: "string"
+        createdBy:
+          type: string
+          example: "string"
+        created_date:
+          type: string
+          example: "string"
+        modified_date:
+          type: string
+          example: "string"
+        status:
+          type: string
+          example: "Pending"
+      required:
+        - setname
+        - domain
+        - created_date
+        - modified_date
+        - status
+    AssessmentResponse:
+      type: object
+      properties:
+        assesment:
+          type: object
+          description: The name of the set associated with the assessment response.
+          $ref: '#/components/schemas/AssessmentDTO'
+        questions:
+          type: array
+          items:
+            $ref: '#/components/schemas/Question'
+   
