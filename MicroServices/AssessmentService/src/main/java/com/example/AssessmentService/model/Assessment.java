@@ -29,6 +29,8 @@ public class Assessment {
 
     private  LocalDateTime createddate;
 
+    private SetStatus status;
+
     @OneToMany(cascade = CascadeType.ALL)
     @JoinTable(
             name = "set_question_map", // Name of the join table

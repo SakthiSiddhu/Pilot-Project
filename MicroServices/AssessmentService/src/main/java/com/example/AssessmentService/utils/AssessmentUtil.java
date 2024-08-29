@@ -4,6 +4,7 @@ import com.example.AssessmentService.dto.AssessmentDTO;
 import com.example.AssessmentService.model.Answer;
 import com.example.AssessmentService.model.Assessment;
 import com.example.AssessmentService.model.Question;
+import com.example.AssessmentService.model.SetStatus;
 import lombok.Data;
 import org.springframework.stereotype.Component;
 
@@ -15,16 +16,18 @@ import java.util.stream.Collectors;
 @Component
 @Data
 public class AssessmentUtil {
-
+    private   LocalDateTime date = LocalDateTime.now();
+    private SetStatus initalStatus = SetStatus.PENDING;
     public Assessment MapToAssessment(AssessmentDTO assessmentDto)
     {
-        LocalDateTime date = LocalDateTime.now();
+
         Assessment assessment = new Assessment();
         assessment.setSetName(assessmentDto.getSetName());
         assessment.setDomain(assessmentDto.getDomain());
         assessment.setCreatedby(assessmentDto.getCreatedby());
         assessment.setApprovedby(assessmentDto.getApprovedby());
         assessment.setCreateddate(date);
+        assessment.setStatus(initalStatus);
 
 
         List<Question> questions = assessmentDto.getQuestions().stream()
