@@ -23,6 +23,12 @@ public class Assessment {
 
     private String domain;
 
+    private String createdby;
+
+    private String approvedby;
+
+    private  LocalDateTime createddate;
+
     @OneToMany(cascade = CascadeType.ALL)
     @JoinTable(
             name = "set_question_map", // Name of the join table

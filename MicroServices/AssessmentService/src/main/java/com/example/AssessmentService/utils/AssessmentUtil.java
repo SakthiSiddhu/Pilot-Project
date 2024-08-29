@@ -7,6 +7,7 @@ import com.example.AssessmentService.model.Question;
 import lombok.Data;
 import org.springframework.stereotype.Component;
 
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -17,9 +18,13 @@ public class AssessmentUtil {
 
     public Assessment MapToAssessment(AssessmentDTO assessmentDto)
     {
+        LocalDateTime date = LocalDateTime.now();
         Assessment assessment = new Assessment();
         assessment.setSetName(assessmentDto.getSetName());
         assessment.setDomain(assessmentDto.getDomain());
+        assessment.setCreatedby(assessmentDto.getCreatedby());
+        assessment.setApprovedby(assessmentDto.getApprovedby());
+        assessment.setCreateddate(date);
 
 
         List<Question> questions = assessmentDto.getQuestions().stream()
@@ -57,6 +62,8 @@ public class AssessmentUtil {
         AssessmentDTO assessmentDTO = new AssessmentDTO();
         assessmentDTO.setSetName(assessment.getSetName());
         assessmentDTO.setDomain(assessment.getDomain());
+        assessmentDTO.setCreatedby(assessment.getCreatedby());
+        assessmentDTO.setApprovedby(assessment.getApprovedby());
         return assessmentDTO;
     }
 
